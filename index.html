@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BruxAbode | Premium Real Estate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <header class="luxury-header">
+        <nav class="container">
+            <div class="brand-container">
+                <img src="assets/logo.png" alt="Brux Abode Logo" class="nav-logo">
+                <span class="logo-text">BRUX <span class="accent">ABODE</span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#listings">Listings</a></li>
+                <li><a href="#" id="cart-btn" class="nav-icon">
+                    <i data-lucide="shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                <li><a href="#" class="btn-primary">Contact Agent</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero"class="hero">
+        <div class="hero-slides">
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1600')"></div> <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&q=80&w=1600')"></div> <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=1600')"></div> </div>
+
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content" data-aos="fade-up">
+            <h1>Find Your Legacy <br>Among The Stars.</h1>
+            <p>Curated luxury properties for the modern visionary.</p>
+            <a href="#listings" class="btn-primary">View Collection</a>
+        </div>
+    </section>
+
+    <main class="container" id="listings">
+        <div class="section-header" data-aos="fade-right">
+            <h2 class="section-title">Featured Estates</h2>
+            <p>Handpicked gems in prime locations.</p>
+        </div>
+        <div id="product-grid" class="grid">
+            </div>
+    </main>
+
+    <footer class="container" data-aos="fade-up">
+        <p>&copy; 2026 LuxeAbode Real Estate. All rights reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            offset: 120, 
+            duration: 800,
+            easing: 'ease-in-out',
+            once: false // Set to false so it animates every time you scroll up/down
+        });
+        lucide.createIcons();
+    </script>
+</body>
+</html>
