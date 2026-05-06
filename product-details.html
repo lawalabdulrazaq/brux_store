@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details | Brux Abode</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="details-page">
+    <header class="luxury-header">
+        <nav class="container">
+            <div class="brand-container" onclick="window.location.href='index.html'">
+                <img src="assets/logo.png" alt="Logo" class="nav-logo">
+                <span class="logo-text">BRUX <span class="accent">ABODE</span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Collection</a></li>
+                <li><a href="cart.html" id="cart-btn" class="nav-icon">
+                    <i data-lucide="shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="product-details-content">
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+        document.addEventListener('DOMContentLoaded', () => {
+            if(typeof renderDetailsPage === "function") renderDetailsPage();
+        });
+    </script>
+</body>
+</html>

@@ -19,8 +19,9 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#hero">Home</a></li>
-                <li><a href="#listings">Listings</a></li>
-                <li><a href="#" id="cart-btn" class="nav-icon">
+                <li><a href="index.html">Sales</a></li>
+                <li><a href="#listings" onclick="filterRentals()">Rentals</a></li> 
+                <li><a href="cart.html" id="cart-btn" class="nav-icon">
                     <i data-lucide="shopping-cart"></i>
                     <span id="cart-count">0</span>
                 <li><a href="#" class="btn-primary">Contact Agent</a></li>
@@ -46,6 +47,13 @@
             <h2 class="section-title">Featured Estates</h2>
             <p>Handpicked gems in prime locations.</p>
         </div>
+
+        <div class="filter-bar container" data-aos="fade-up">
+            <button class="filter-btn active" onclick="setActiveFilter(this, 'all')">All Properties</button>
+            <button class="filter-btn" onclick="setActiveFilter(this, 'sale')">Sales</button>
+            <button class="filter-btn" onclick="setActiveFilter(this, 'rent')">Rentals</button>
+        </div>
+        
         <div id="product-grid" class="grid">
             </div>
     </main>
@@ -53,6 +61,20 @@
     <footer class="container" data-aos="fade-up">
         <p>&copy; 2026 LuxeAbode Real Estate. All rights reserved.</p>
     </footer>
+
+    <div id="cart-modal" class="modal">
+    <div class="modal-content luxury-card">
+        <div class="modal-header">
+            <h2>Your Interest List</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+            <div id="cart-items-container">
+                </div>
+            <div class="modal-footer">
+                <button class="btn-agent" onclick="alert('Inquiry sent for selected properties.')">Inquire All</button>
+            </div>
+        </div>
+    </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 

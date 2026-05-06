@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Collection | Brux Abode</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="cart-page">
+    <header class="luxury-header">
+        <nav class="container">
+            <div class="brand-container" onclick="window.location.href='index.html'">
+                <img src="assets/logo.png" alt="Logo" class="nav-logo">
+                <span class="logo-text">BRUX <span class="accent">ABODE</span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Back to Collection</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container cart-main-section">
+        <h1 class="section-title" style="margin-top: 120px;">Interest Collection</h1>
+        
+        <div class="cart-layout">
+            <div id="cart-items-list" class="items-column">
+                </div>
+
+            <div class="summary-column">
+                <div class="luxury-card summary-box">
+                    <h3>Summary</h3>
+                    <div class="summary-row">
+                        <span>Total Properties:</span>
+                        <span id="summary-count">0</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Estimated Value:</span>
+                        <span id="summary-total">$0</span>
+                    </div>
+                    <button class="btn-primary" style="width:100%;" onclick="processOrder()">Request Private Viewing</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+        // call render specifically for the cart
+        document.addEventListener('DOMContentLoaded', () => {
+            if(typeof renderFullCartPage === "function") renderFullCartPage();
+        });
+    </script>
+</body>
+</html>
