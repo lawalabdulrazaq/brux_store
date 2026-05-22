@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Login | Brux Abode</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page-login">
+
+    <div class="luxury-auth-card">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #fff; margin-bottom: 5px;">Welcome Back</h2>
+        <p class="auth-subtitle">Sign in to view exclusive pricing and book properties.</p>
+        
+        <form id="login-form">
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" id="login-email" class="luxury-input" placeholder="email@example.com" required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="login-password" class="luxury-input" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; font-weight: bold;">Sign In</button>
+        </form>
+        <p class="auth-footer" style="margin-top: 25px; font-size: 0.85rem; color: #8a8a8a;">New here? <a href="register.html" style="color: var(--accent-gold); text-decoration: none;">Join the Elite</a></p>
+    </div>
+
+    <script src="auth-logic.js"></script>
+</body>
+</html>

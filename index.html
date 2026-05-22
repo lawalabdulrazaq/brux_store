@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -60,6 +60,33 @@
 
     <footer class="container" data-aos="fade-up">
         <p>&copy; 2026 LuxeAbode Real Estate. All rights reserved.</p>
+    </footer> -->
+
+    <!-- <footer class="container" data-aos="fade-up">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>BRUX <span class="accent">ABODE</span></h3>
+                <p>Redefining luxury real estate and short-let experiences.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Us</a>
+                </ul>
+            </div>
+            <div class="footer-socials">
+                <h4>Connect</h4>
+                <div class="social-icons"> -->
+                    <!-- Add your social links here -->
+                    <!-- <span>Instagram</span> | <span>LinkedIn</span> | <span>Twitter</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Brux Abode Global. All Rights Reserved.
+        </div>
     </footer>
 
     <div id="cart-modal" class="modal">
@@ -89,5 +116,105 @@
         });
         lucide.createIcons();
     </script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Brux Abode | Luxury Real Estate</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <header class="luxury-header">
+        <nav class="container">
+            <!-- <div class="brand-container" onclick="window.location.href='index.html'">
+                <span class="logo-text">BRUX <span class="accent">ABODE</span></span>
+            </div> -->
+            <div class="brand-container">
+                <img src="assets/logo.png" alt="Brux Abode Logo" class="nav-logo">
+                <span class="logo-text">BRUX <span class="accent">ABODE</span></span>
+            </div>
+            <ul class="nav-links" id="nav-actions">
+                </ul>
+        </nav>
+    </header>
+
+    <section id="welcome-hero" class="welcome-hero-section" style="display: none;">
+        <div class="hero-bg-overlay"></div>
+        <div class="welcome-content" data-aos="fade-up">
+            <p class="gold-tagline">WELCOME TO ULTIMATE LUXURY</p>
+            <h1>Find Your Legacy <br>Among The Stars.</h1>
+            <p class="hero-sub">An exclusive circle of premium mansions and curated short-lets.</p>
+            <div class="hero-cta-group">
+                <a href="register.html" class="btn-primary main-cta">Get Started</a>
+                <a href="#listings-section" class="btn-primary">Explore Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <main id="listings-section" class="container main-business-section">
+        <h2 class="section-title" id="business-title">Our Exclusive Portfolio</h2>
+        
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="setActiveFilter(this, 'all')">All Properties</button>
+            <button class="filter-btn" onclick="setActiveFilter(this, 'sale')">Sales</button>
+            <button class="filter-btn" onclick="setActiveFilter(this, 'rent')">Rentals</button>
+        </div>
+
+        <div id="product-grid" class="grid"></div>
+    </main>
+
+    <footer class="luxury-footer" role="contentinfo" aria-label="Site Footer">
+        <div class="container footer-grid">
+            <div class="footer-brand" aria-label="About Brux Abode">
+                <h3>BRUX <span class="accent">ABODE</span></h3>
+                <p>Redefining architectural elegance and premium short-let experiences across global hotspots.</p>
+            </div>
+
+            <div class="footer-links footer-contact" aria-labelledby="footer-contact">
+                <h4 id="footer-contact">Contact</h4>
+                <address>
+                    <p><a href="mailto:concierge@bruxabode.com">concierge@bruxabode.com</a></p>
+                    <p><a href="tel:+2348000000000">+234 800 000 0000</a></p>
+                    <p>Office: Lagos, Nigeria</p>
+                </address>
+            </div>
+
+            <div class="footer-links" aria-labelledby="footer-legal">
+                <h4 id="footer-legal">Legal</h4>
+                <nav aria-label="Legal Links">
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Investment Disclosure</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="footer-links" aria-labelledby="footer-connect">
+                <h4 id="footer-connect">Connect</h4>
+                <ul class="social-links" aria-label="Social links">
+                    <li><a href="#" aria-label="Instagram">Instagram</a></li>
+                    <li><a href="#" aria-label="LinkedIn">LinkedIn</a></li>
+                    <li><a href="#" aria-label="X Twitter">X / Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container footer-bottom-content">
+                <p>&copy; 2026 Brux Abode Global. All Rights Reserved.</p>
+                <p class="gold-tagline" style="margin: 0; font-size: 0.75rem;">PRIVÉ CIRCLE</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

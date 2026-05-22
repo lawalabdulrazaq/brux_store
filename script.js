@@ -91,13 +91,83 @@ const properties = [
     },
 ];
 
+// Retrieve previously saved interests from browser storage or start a fresh array
 let interestList = JSON.parse(localStorage.getItem('brux_interests')) || [];
 
+// document.addEventListener('DOMContentLoaded', () => {
+//     renderListings();
+//     updateUI();
+//     setupNavigation();
+// });
+
+// let currentFilter = 'all';
+
 document.addEventListener('DOMContentLoaded', () => {
-    renderListings();
-    updateUI();
-    setupNavigation();
+    adjustInterfaceForLoginState();
+    renderListings('all');
+    updateCartBadgeCount();
 });
+
+function adjustInterfaceForLoginState() {
+    const isLoggedIn = localStorage.getItem('brux_token');
+    const welcomeHero = document.getElementById('welcome-hero');
+    const businessSection = document.getElementById('listings-section');
+    const businessTitle = document.getElementById('business-title');
+    const navActions = document.getElementById('nav-actions');
+
+    if (isLoggedIn) {
+        if (welcomeHero) welcomeHero.style.display = 'none';
+        if (businessSection) businessSection.style.paddingTop = '140px';
+        if (businessTitle) businessTitle.innerText = `Welcome Back, ${localStorage.getItem('brux_user') || 'Member'}`;
+        
+        // Show Member Navigation Actions
+        // navActions.innerHTML = `
+        //     <li><a href="index.html" class="active">Home</a></li>
+        //     <li><a href="cart.html" class="nav-icon"><span id="cart-count">0</span> Checkout</a></li>
+        //     <li><a href="#" onclick="logoutUser()">Sign Out</a></li>
+        // `;
+
+        // Dynamic navigation array containing an instant dashboard jump route if user is admin
+        const adminDashboardLink = localStorage.getItem('brux_role') === 'admin' 
+            ? `<li><a href="admin.html" style="color: var(--accent-gold); font-weight: bold;">Control Center</a></li>` 
+            : '';
+
+        navActions.innerHTML = `
+            ${adminDashboardLink}
+            <li><a href="#" onclick="toggleWelcomeView(true)">Showcase</a></li>
+            <li><a href="index.html" class="active" onclick="toggleWelcomeView(false)">Collection</a></li>
+            <li><a href="cart.html" class="nav-icon"><span id="cart-count">0</span> Checkout</a></li>
+            <li><a href="#" onclick="logoutUser()">Sign Out</a></li>
+        `;
+    } else {
+        // Guest Mode: SHOW the massive visual welcoming slide session
+        if (welcomeHero) welcomeHero.style.display = 'flex';
+        if (businessSection) businessSection.style.paddingTop = '60px';
+        if (businessTitle) businessTitle.innerText = "Our Curated Collection";
+
+        // Show Guest Navigation Attention Catchers
+        navActions.innerHTML = `
+            <li><a href="login.html" class="btn-primary nav-cta-btn">Sign In</a></li>
+            <li><a href="register.html" class="btn-primary nav-cta-btn">Join Now</a></li>
+        `;
+    }
+}
+
+window.toggleWelcomeView = function(showHero) {
+    const welcomeHero = document.getElementById('welcome-hero');
+    const businessSection = document.getElementById('listings-section');
+    
+    if (!welcomeHero || !businessSection) return;
+
+    if (showHero) {
+        welcomeHero.style.display = 'flex';
+        businessSection.style.paddingTop = '60px';
+        welcomeHero.scrollIntoView({ behavior: 'smooth' });
+    } else {
+        welcomeHero.style.display = 'none';
+        businessSection.style.paddingTop = '140px';
+    }
+};
 
 // async function processOrder() {
 //     const totalValue = interestList.reduce((sum, item) => sum + item.price, 0);
@@ -120,15 +190,21 @@ document.addEventListener('DOMContentLoaded', () => {
 // }
 
 async function processOrder() {
+    if (interestList.length === 0) {
+        alert("Your selection file is empty.");
+        return;
+    }
     const totalValue = interestList.reduce((sum, item) => sum + item.price, 0);
 
     const orderData = {
         items: interestList,
-        totalValue: totalValue
+        totalValue: totalValue,
+        clientName: localStorage.getItem('brux_user'),
+        clientEmail: localStorage.getItem('brux_email')
     };
 
     try {
-        const response = await fetch('http://localhost:5000/api/orders', {
+        const response = await fetch('http://127.0.0.1:5000/api/orders', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(orderData)
@@ -153,6 +229,8 @@ function renderListings(filter = 'all') {
     const grid = document.getElementById('product-grid');
     if (!grid) return;
 
+    const isLoggedIn = localStorage.getItem('brux_token');
+
     // Filter the array based on user choice
     const filteredData = filter === 'all' 
         ? properties 
@@ -160,29 +238,64 @@ function renderListings(filter = 'all') {
 
     grid.innerHTML = filteredData.map((prop, index) => {
         const isRent = prop.type === 'rent';
+
+        const priceDisplay = isLoggedIn 
+            ? `<p class="price"></p>$${prop.price.toLocaleString()}${isRent ? ' / night' : ''}</p>`
+            : `<p class="price-hidden">Members Only</p>`;
+
+        // const actionFuntion = isLoggedIn
+        //     ? `window.location.href='product-details.html?id=${prop.id}'`
+        //     : `window.location.href='login.html'`;
+
+        // CRITICAL UPDATE: Modified button event strings to capture individual object identities
+        const actionFuntion = isLoggedIn
+            ? `<button class="card-action-btn engagement-active" onclick="capturePropertyInterest(event, ${prop.id})">
+                ${isRent ? 'Book Apartment' : 'Acquire Property'}
+               </button>`
+            : `<button class="card-action-btn" onclick="window.location.href='login.html'">View Details</button>`;
+             
+        // return `
+        //     <div class="card" onclick="${actionFuntion}">
+        //         <div class="card-badge">${isRent ? 'For Rent' : 'For Sale'}</div>
+                
+        //             <img src="${prop.image}" alt="${prop.name}">
+        //             <div class="card-info">
+        //                 <p class="location-tag">${prop.location}</p>
+        //                 <h3>${prop.name}</h3>
+        //                 <p class="price" style="color:${isLoggedIn ? 'var(--accent-gold)' : 'var(--text-muted)'}">${priceDisplay}</p>
+        //                 <button class="card-action-btn">
+        //                     ${isLoggedIn ? (isRent ? 'Book Apartment' : 'View Investment') : 'View Details'}
+        //                 </button>
+        //             </div>
+        //     </div>
+        // `;
+
         return `
-            <div class="card" data-aos="fade-up" data-aos-delay="${index * 50}">
+            <div class="card" onclick="${isLoggedIn ? `window.location.href='product-details.html?id=${prop.id}'` : `window.location.href='login.html'`}">
                 <div class="card-badge">${isRent ? 'For Rent' : 'For Sale'}</div>
-                
-                <!-- Added: Link to details page with ID -->
-                <a href="product-details.html?id=${prop.id}" style="text-decoration:none; color:inherit;">
+                <div class="card-img-container">
                     <img src="${prop.image}" alt="${prop.name}">
-                    <div class="card-info">
-                        <p class="location-tag">${prop.location}</p>
-                        <h3>${prop.name}</h3>
-                        <p class="price">$${prop.price.toLocaleString()}${isRent ? ' / night' : ''}</p>
-                    </div>
-                </a>
-                
-                <div style="padding: 0 25px 25px;">
-                    <button class="btn-primary add-to-cart" onclick="addToInterest(${prop.id})">
-                        ${isRent ? 'Book Now' : 'Save Interest'}
-                    </button>
+                </div>
+                <div class="card-info">
+                    <p class="location-tag">${prop.location}</p>
+                    <h3>${prop.name}</h3>
+                    ${priceDisplay}
+                    ${actionFuntion}
                 </div>
             </div>
         `;
     }).join('');
 }
+
+window.logoutUser = function() {
+    localStorage.clear(); // Wipe authentication tokens
+    
+    // Explicitly reset UI layout parameters before reload to guarantee consistency
+    const welcomeHero = document.getElementById('welcome-hero');
+    if (welcomeHero) welcomeHero.style.display = 'flex';
+    
+    window.location.href = 'index.html'; // Direct back to base landing view
+};
 
 // Initial Call
 document.addEventListener('DOMContentLoaded', () => {
@@ -376,4 +489,38 @@ window.removeFromInterest = function(id) {
     
     // Refresh the items inside the open modal
     renderCartItems();
+};
+
+// Captures product profile targets without triggering parent card click redirections
+window.capturePropertyInterest = function(event, propertyId) {
+    event.stopPropagation(); // STOPS clicking the button from triggering the card's URL redirect
+    
+    const targetProperty = properties.find(p => p.id === propertyId);
+    if (!targetProperty) return;
+
+    // Avoid duplicate additions into the inquiry sheet
+    const alreadySaved = interestList.some(item => item.id === propertyId);
+    if (alreadySaved) {
+        alert(`${targetProperty.name} is already waiting in your inquiry file.`);
+        return;
+    }
+
+    interestList.push(targetProperty);
+    localStorage.setItem('brux_interests', JSON.stringify(interestList));
+    updateCartBadgeCount();
+
+    alert(`Added ${targetProperty.name} to your checkout list!`);
+};
+
+// Instantly matches badge indicators with list arrays
+function updateCartBadgeCount() {
+    const countBadge = document.getElementById('cart-count');
+    if (countBadge) {
+        countBadge.innerText = interestList.length;
+    }
+}
+
+window.logoutUser = function() {
+    localStorage.clear();
+    window.location.href = 'index.html';
 };

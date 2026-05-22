@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Join the Elite | Brux Abode</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body class="auth-page">
-        <div class="auth-container luxury-card"data-aos="zoom-in">
-            <h2>Create Account</h2>
-            <p class="auth-subtitle">Join our exclusive circle of luxury real estate.</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Elite | Brux Abode</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page-register">
 
-            <form id="register-form">
-                <div class="input-group">
-                    <label>Full Name</label>
-                    <input type="text" id="reg-username" placeholder="Enter your name" required>
-                </div>
-                <div class="input-group">
-                    <label>Email Address</label>
-                    <input type="email" id="reg-email" placeholder="email@example.com" required>
-                </div>
-                <div class="input-group">
-                    <label>Password</label>
-                    <input type="password" id="reg-password" placeholder="@**&#$%^&" required>
-                </div>
-                <button type="submit" class="btn-primary" style="width: 100%;">Register</button>
-            </form>
-            <p class="auth-footer">Already have an account? <a href="login.html">Log in here</a>.</p>
-        </div>
-        <script src="auth-logic.js"></script>
-    </body>
+    <div class="luxury-auth-card">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #fff; margin-bottom: 5px;">Create Account</h2>
+        <p class="auth-subtitle">Join our exclusive circle of luxury real estate.</p>
+        
+        <form id="register-form">
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="reg-username" class="luxury-input" placeholder="Enter your name" required>
+            </div>
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" id="reg-email" class="luxury-input" placeholder="email@example.com" required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="reg-password" class="luxury-input" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; font-weight: bold;">Register Now</button>
+        </form>
+        <p class="auth-footer" style="margin-top: 25px; font-size: 0.85rem; color: #8a8a8a;">Already a member? <a href="login.html" style="color: var(--accent-gold); text-decoration: none;">Login here</a></p>
+    </div>
+
+    <script src="auth-logic.js"></script>
+</body>
 </html>

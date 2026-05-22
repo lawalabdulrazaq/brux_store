@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Control Center | Brux Abode</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="admin-dashboard-page">
+
+    <header class="luxury-header">
+        <nav class="container">
+            <span class="logo-text">BRUX <span class="accent">CONTROL</span></span>
+            <ul class="nav-links">
+                <li><a href="index.html">View Site</a></li>
+                <li><a href="#" onclick="localStorage.clear(); window.location.href='login.html'">Sign Out</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container" style="padding-top: 120px;">
+        <h1 style="font-family: 'Playfair Display', serif; color: #fff; margin-bottom: 40px;">System Overview</h1>
+
+        <section class="admin-section">
+            <h2>Incoming Luxury Inquiries</h2>
+            <div class="table-container">
+                <table id="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Inquiry ID</th>
+                            <th>Properties Selected</th>
+                            <th>Total Value</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-tbody">
+                        </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="admin-section" style="margin-top: 60px;">
+            <h2>User & Staff Privilege Management</h2>
+            <div class="table-container">
+                <table id="users-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Current Access Role</th>
+                            <th>Modify Privilege</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-tbody">
+                        </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="admin-logic.js"></script>
+</body>
+</html>
